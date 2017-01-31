@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>This is a test webpage!</h1>
+
+<div>
+	<h3>Enter your message here!</h3>
+	<input type="text" id="chat-message"/>
+	<input type="button" value="send" onclick="sendChatMessage()"/>
+</div>
+
+<div id="userNames"></div>
+<div id="userChats"></div>
+
+<!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+<script type="text/javascript">
+	var socketio = io.connect('http://127.0.0.1:3000');
+	socketio.on('users', (socketUsers)=>{
+		console.log(socketUsers);
+		var newHTML = "";
+		socketUsers.map((currSocket, index)=>{
+			newHTML += '<li class"user">' + currSocket.name + '</li>';
+		});
+		document.getElementById('userNames').innerHTML = newHTML;
+	});
+
+	function sendChatMessage(){
+		var messageToSend = document.getElementById('chat-message').value;
+		console.log(messageToSend);
+		socketio.emit('messageToServer', {
+			message: messageToSend,
+			name: "Anonymous"
+		});
+	}
+
+	socketio.on('messageToClient', (messageObj)=>{
+		document.getElementById('userChats').innerHTML = ('<div class="message"> <p>' + messageObj.message + '--' + messageObj.date + '</p></div>');
+	});
+</script>
+</body>
+</html>

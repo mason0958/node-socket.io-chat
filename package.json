@@ -1,0 +1,23 @@
+{
+  "name": "node-socketio-chat",
+  "version": "1.0.0",
+  "description": "A node socket.io chat server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mason0958/node-socket.io-chat.git"
+  },
+  "author": "Mason Mahaffey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mason0958/node-socket.io-chat/issues"
+  },
+  "homepage": "https://github.com/mason0958/node-socket.io-chat#readme",
+  "dependencies": {
+    "socket.io": "^1.7.2"
+  }
+}
