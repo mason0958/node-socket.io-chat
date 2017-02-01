@@ -2,46 +2,60 @@
 <html>
 <head>
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://meyerweb.com/eric/tools/css/reset/reset.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<h1>This is a test webpage!</h1>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
 <div>
-	<h3>Enter your message here!</h3>
-	<input type="text" id="chat-message"/>
-	<input type="button" value="send" onclick="sendChatMessage()"/>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1" id="chat-box" style="border: 1px solid black; height: 200px; overflow-x: hidden; overflow-y: scroll;">
+			<div id="userNames" style="float: left"></div>
+			<div id="userChats" style="float: right;"></div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-2 col-md-offset-1">
+			<form class="form-group" onsubmit="sendChatMessage()">
+				<div style="width: 80%; float: left;">
+					<input class="form-control" type="text" id="chat-message"/>
+				</div>
+				<input class="btn-primary" type="submit" value="send" style="float: right; width: 60px; height: 33px; border-radius: 4px 4px 4px 4px " />
+			</form>
+		</div>
+	</div>
 </div>
 
-<div id="userNames"></div>
-<div id="userChats"></div>
+<!-- <div class="tool-bar col-sm-12">
+	<input type="color" id="color-picker" name="">
+	<label>Choose your market thickness</label>
+	<input type="number" id="thickness-picker" placeholder="10">
+</div> -->
+
+<!-- 		<div style="position: relative; bottom: 300px; left: 100px;">
+			<canvas id="canvas" width="500px" height="500px"></canvas>
+		<!-- </div> -->
 
 <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
-<script type="text/javascript">
-	var socketio = io.connect('http://127.0.0.1:3000');
-	socketio.on('users', (socketUsers)=>{
-		console.log(socketUsers);
-		var newHTML = "";
-		socketUsers.map((currSocket, index)=>{
-			newHTML += '<li class"user">' + currSocket.name + '</li>';
-		});
-		document.getElementById('userNames').innerHTML = newHTML;
-	});
-
-	function sendChatMessage(){
-		var messageToSend = document.getElementById('chat-message').value;
-		console.log(messageToSend);
-		socketio.emit('messageToServer', {
-			message: messageToSend,
-			name: "Anonymous"
-		});
-	}
-
-	socketio.on('messageToClient', (messageObj)=>{
-		document.getElementById('userChats').innerHTML = ('<div class="message"> <p>' + messageObj.message + '--' + messageObj.date + '</p></div>');
-	});
-</script>
+<script type="text/javascript" src="http://localhost:8080/scripts.js"></script>
 </body>
 </html>

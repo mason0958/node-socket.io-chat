@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/mason0958/node-socket.io-chat#readme",
   "dependencies": {
+    "connect": "^3.5.0",
+    "serve-static": "^1.11.2",
     "socket.io": "^1.7.2"
   }
 }
